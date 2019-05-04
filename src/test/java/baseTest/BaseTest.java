@@ -1,5 +1,6 @@
 package baseTest;
 
+import dataSource.DataProvider;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,9 +9,7 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 import pageObjects.Guru99_HomePage;
 import pageObjects.Guru99_LoginPage;
 
@@ -19,12 +18,12 @@ import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
-    public WebDriver driver;
-    public Guru99_LoginPage loginPage;
-    public Guru99_HomePage homePage;
+    public static WebDriver driver;
+    public static Guru99_LoginPage loginPage;
+    public static Guru99_HomePage homePage;
 
     @Parameters({"nodeUrl","typeOfBrowser"})
-    @BeforeClass
+    @BeforeSuite
         public  void setUp(String url, String browserName) throws MalformedURLException, InterruptedException {
         System.out.println("In before class");
         driver= new RemoteWebDriver(new URL(url), getBrowserCapabilities(browserName));
@@ -33,6 +32,12 @@ public class BaseTest {
         loginPage= PageFactory.initElements(driver,Guru99_LoginPage.class);
         homePage= PageFactory.initElements(driver,Guru99_HomePage.class);
 
+    }
+    @Parameters({"sheetName"})
+    @BeforeClass
+    public void loadSpreadSheet(String sheetDataFileName)
+    {
+        DataProvider.loadSpreadSheet(sheetDataFileName);
     }
     public void explicitWait(WebElement element)
     {
@@ -59,7 +64,7 @@ public class BaseTest {
         }
     }
 
-    @AfterClass
+    @AfterSuite
     public void tearDown()
     {
         driver.quit();

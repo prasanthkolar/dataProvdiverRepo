@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd"><suite name="All Test Suite">
+    <parameter name="nodeUrl" value="http://localhost:4444/wd/hub"></parameter>
+    <parameter name="typeOfBrowser" value="chrome"></parameter>
     <test verbose="2" preserve-order="true" name="E:/Demo">
-        <parameter name="userName" value="mngr188307"></parameter>
-        <parameter name="password" value="aguzasE"></parameter>
-        <parameter name="nodeUrl" value="http://localhost:4444/wd/hub"></parameter>
-        <parameter name="typeOfBrowser" value="chrome"></parameter>
+        <parameter name="sheetName" value="C:/Users/asus/Desktop/TestData.xlsx"></parameter>
         <classes>
             <class name="testScripts.LoginTest">
         </class>
 
-            <class name="testScripts.HomeTest">
-            </class>
         </classes>
     </test>
 </suite>

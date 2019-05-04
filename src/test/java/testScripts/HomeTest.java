@@ -19,7 +19,7 @@ public class HomeTest extends BaseTest {
         Assert.assertEquals(actualTitle,expectedTitle);
     }
 
-    @Test(enabled = false)
+    @Test(enabled = true)
     public void addNewCustomer()
     {
     homePage.addNewCustomerLink.click();
